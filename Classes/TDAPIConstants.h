@@ -41,8 +41,11 @@
 // edit task url
 #define kEditTaskURLFormat @"/tasks/edit.php?"
 
-// delete tasks url
-#define kDeleteTasksURLFormat @"/tasks/delete.php?"
+// delete task url
+#define kDeleteTaskURLFormat @"/tasks/delete.php?"
+
+// get delete task url
+#define kGetDeletedTaskURLFormat @"/tasks/delete.php?"
 
 // get folders url
 #define kGetFoldersURLFormat @"/folders/get.php?"

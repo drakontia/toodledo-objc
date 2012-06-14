@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>libToodledoAPI.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>libToodledoAPIMac.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+		<key>libToodledoAPIiPhone.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>CF04581610E2F5C400DED3CF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FA649B9610C30B250051F758</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FAA9E6EC10A88C7C001925AB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FAF874B21096478600C4C137</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

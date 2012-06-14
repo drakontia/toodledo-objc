@@ -19,7 +19,6 @@
 
 @interface TDApi ()
 
-- (BOOL)loadServerInfos;
 - (BOOL)loadAccountInfo;
 - (NSString *)getUserIdForUsername:(NSString *)aUsername andPassword:(NSString *)aPassword;
 - (NSURLRequest *)requestForURLString:(NSString *)anUrlString additionalParameters:(NSDictionary *)additionalParameters;
@@ -91,7 +90,6 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 				[self setPasswordHashWithPassword:password];
 				// auth
 				[self key];
-				[self loadServerInfos];
 			}
 		}
 	}
@@ -353,8 +351,8 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 					}
 					
 					//serverTimeDifference adden
-					task.date_modified = [task.date_modified addTimeInterval:-servertimeDifference];
-					task.date_created = [task.date_created addTimeInterval:-servertimeDifference];
+					task.date_modified = [task.date_modified dateByAddingTimeInterval:-servertimeDifference];
+					task.date_created = [task.date_created dateByAddingTimeInterval:-servertimeDifference];
 				}
 				returnResult = result;
 			}
@@ -374,7 +372,7 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 	
 	if (self.key != nil) {
 		NSError *requestError = nil, *parseError = nil;
-		NSURLRequest *request = [self authenticatedRequestForURLString:kGetDeletedTasksURLFormat additionalParameters:nil];
+		NSURLRequest *request = [self authenticatedRequestForURLString:kGetDeletedTaskURLFormat additionalParameters:nil];
 		NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&requestError];
 		
 		if (requestError == nil) {
@@ -388,7 +386,7 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 			{
 				for (GtdTask *task in result) {
 					//serverTimeDifference adden
-					task.date_deleted = [task.date_deleted addTimeInterval:-servertimeDifference];
+					task.date_deleted = [task.date_deleted dateByAddingTimeInterval:-servertimeDifference];
 				}
 				returnResult = result;
 			}
@@ -677,7 +675,7 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 	
 	if (self.key != nil) {
 		NSError *requestError = nil, *parseError = nil;
-		NSURLRequest *request = [self authenticatedRequestForURLString:kGetContextsURLFormat additionalParameters:nil];
+		NSURLRequest *request = [self authenticatedRequestForURLString:kGetContextURLFormat additionalParameters:nil];
 		NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&requestError];
 		
 		if (requestError == nil) {
@@ -818,7 +816,7 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 			
 			//add servertimeDifference to date_modified
 			for(GtdNote *note in result)
-				note.date_modified = [note.date_modified addTimeInterval:servertimeDifference];
+				note.date_modified = [note.date_modified dateByAddingTimeInterval:servertimeDifference];
 			
 			if (parseError != nil) 
 			{
@@ -1019,50 +1017,13 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 #pragma mark -
 #pragma mark helper methods
 
-// Get server infos for api
-- (BOOL)loadServerInfos {
-	
-	if ([self isAuthenticated]) {
-		NSError *parseError = nil;
-		NSURLRequest *request = [self authenticatedRequestForURLString:kServerInfoURLFormat additionalParameters:nil];
-		NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-		
-		TDSimpleParser *parser = [[TDSimpleParser alloc] initWithData:responseData];
-		parser.tagName = @"date";
-		NSArray *result = [[[parser parseResults:&parseError] retain] autorelease];
-		[parser release];
-		
-		if ([result count] == 1) {
-			NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-			NSLocale *enUS = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
-			[formatter setLocale:enUS];
-			[enUS release];
-			[formatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss"];
-			
-			NSDate *serverDate = [formatter dateFromString:[result objectAtIndex:0]];
-			servertimeDifference = [serverDate timeIntervalSinceNow];
-			
-			[formatter release];
-			DLog(@"Server infos retrieved, servertime difference: %f.", servertimeDifference);
-			return YES;
-		}
-		else {
-			DLog(@"Could not fetch server infos.");
-			return NO;
-		}	
-	}
-	else {
-		return NO;
-	}
-}
-
 - (BOOL)loadAccountInfo {
 	
 	BOOL returnResult = NO;
 	
 	if (self.key != nil) {
 		NSError *requestError = nil, *parseError = nil;
-		NSURLRequest *request = [self authenticatedRequestForURLString:kUserAccountInfoURLFormat additionalParameters:nil];
+		NSURLRequest *request = [self authenticatedRequestForURLString:kAccountInfoURLFormat additionalParameters:nil];
 		NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&requestError];
 		
 		if (requestError == nil) {
@@ -1087,7 +1048,7 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 	NSError *requestError = nil, *parseError = nil;
 
 	NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:aUsername, @"email", aPassword, @"pass", nil];
-	NSURLRequest *request = [self requestForURLString:kUserIdURLFormat additionalParameters:params];
+	NSURLRequest *request = [self requestForURLString:kLookupURLFormat additionalParameters:params];
 	[params release];
 	NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&requestError];
 	

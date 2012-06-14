@@ -96,7 +96,7 @@
 	STAssertTrue(results != nil, @"Parser return value must not be nil.");
 	STAssertTrue(error == nil, @"Parser error object must be nil.");
 	STAssertTrue([results count] == 7, @"Parser return array count must be 7.");
-	STAssertTrue([@"2010-01-12 13:33:00 +0100" isEqualToString:[[[results objectAtIndex:0] date_due] description]], @"Wrong date: %@", [[[results objectAtIndex:0] date_due] description]);
+	STAssertTrue([@"2010-01-12 04:33:00 +0000" isEqualToString:[[[results objectAtIndex:0] date_due] description]], @"Wrong date: %@", [[[results objectAtIndex:0] date_due] description]);
 
 }
 
