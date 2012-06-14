@@ -1,0 +1,25 @@
+var protocol_gtd_api_p =
+[
+    [ "addContext:error:", "protocol_gtd_api-p.html#afcdf203fe3d845ae787a97c2177cbfeb", null ],
+    [ "addFolder:error:", "protocol_gtd_api-p.html#a89657099278b10db7cde3ffd77df8ffa", null ],
+    [ "addNote:error:", "protocol_gtd_api-p.html#a6519f21614619818594508d553f8770e", null ],
+    [ "addTask:error:", "protocol_gtd_api-p.html#a14282694699844463b1141a320bc5060", null ],
+    [ "deleteContext:error:", "protocol_gtd_api-p.html#ae5c6a49b75132be64eb515e8d6ba5121", null ],
+    [ "deleteFolder:error:", "protocol_gtd_api-p.html#acb1ebb5bf8cfe23e43715be949f5e363", null ],
+    [ "deleteNote:error:", "protocol_gtd_api-p.html#aa9a0cc49d2e48db8ca29966a4ec732cc", null ],
+    [ "deleteTask:error:", "protocol_gtd_api-p.html#a190504b90f4c42af7bb1965d446307de", null ],
+    [ "editContext:error:", "protocol_gtd_api-p.html#a479aeebc9115275b2906cd3063f5b13c", null ],
+    [ "editFolder:error:", "protocol_gtd_api-p.html#abc422fe99730da87bd43d92bed10cce9", null ],
+    [ "editNote:error:", "protocol_gtd_api-p.html#af0af68c6141a03fe11adef7a03978489", null ],
+    [ "editTask:error:", "protocol_gtd_api-p.html#ac7bd4de723256783dd0fc0714383c03f", null ],
+    [ "getContexts:", "protocol_gtd_api-p.html#ae22b6756e023c48822cdb4baab012069", null ],
+    [ "getDeleted:", "protocol_gtd_api-p.html#a0fb77016190ec24620e09d7d0e731915", null ],
+    [ "getFolders:", "protocol_gtd_api-p.html#a9dc635d4b22cdf81d84d2a891e960c04", null ],
+    [ "getLastModificationsDates:", "protocol_gtd_api-p.html#aa72698d8f41dd891275ab132cb5486f0", null ],
+    [ "getNotes:", "protocol_gtd_api-p.html#a47e531dddd4e1569672244ef4453eb7a", null ],
+    [ "getTasks:", "protocol_gtd_api-p.html#ac4e65820f4afb2966fc00dcf4e48f42f", null ],
+    [ "identifier", "protocol_gtd_api-p.html#ae1fcd514accee51712fe6fbbe434ebca", null ],
+    [ "initWithUsername:password:error:", "protocol_gtd_api-p.html#a623f49bc02e668c9e5dd5eac07e0ca57", null ],
+    [ "identifier", "protocol_gtd_api-p.html#ab4940c71a13edd9d916bfafd3b8f5775", null ],
+    [ "isAuthenticated", "protocol_gtd_api-p.html#a81310e55fbf99f319a27d7437242cd7a", null ]
+];
