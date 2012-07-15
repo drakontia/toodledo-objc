@@ -20,7 +20,7 @@
 	return self;
 }
 
-- (id)initWithData:(NSData *)aData {
+- (id)JSONObjectWithData:(NSData *)aData {
 	if (self = [super init]) {
 		self.data = aData;
 	}
@@ -35,15 +35,11 @@
     [super dealloc];
 }
 
-- (NSMutableArray *)parseResults:(NSError **)parseError {
-	NSXMLParser *parser = [[NSXMLParser alloc] initWithData:data];	
-	[parser setDelegate:self];
-	[parser setShouldProcessNamespaces:NO];
-	[parser setShouldReportNamespacePrefixes:NO];
-	[parser setShouldResolveExternalEntities:NO];
+- (NSMutableArray *)parseResults:(NSError **)error {
+	NSJSONSerialization *parser = [[NSJSONSerialization alloc] JSONObjectWithData:data];
 	[parser parse];
 	[parser release];
-	
+
 	if (error) {
 		*parseError = error;
 		return nil;
@@ -54,9 +50,9 @@
 }
 
 #pragma mark -
-#pragma mark NSXMLParser delegation methods
+#pragma mark NSJSONSerialization delegation methods
 
-- (void)parserDidStartDocument:(NSXMLParser *)parser {
+- (void)parserDidStartDocument:(NSJSONSerialization *)parser {
 	if (results != nil) {
 		[results release];
 		results = nil;
@@ -64,7 +60,7 @@
 	results = [[NSMutableArray alloc] init];
 }
 
-- (void)parser:(NSXMLParser *)parser foundCharacters:(NSString *)string {	
+- (void)parser:(NSJSONSerialization *)parser foundCharacters:(NSString *)string {
 	string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	if (!currentString) {
 		currentString = [[NSMutableString alloc] initWithString:string];
@@ -73,11 +69,11 @@
 	}
 }
 
-- (void)parser:(NSXMLParser *)parser parseErrorOccurred:(NSError *)parseError {
+- (void)parser:(NSJSONSerialization *)parser parseErrorOccurred:(NSError *)parseError {
 	error = [parseError retain];
 }
 
-- (void)parserDidEndDocument:(NSXMLParser *)parser {
+- (void)parserDidEndDocument:(NSJSONSerialization *)parser {
 	// id result = error ? (id)error : (id)results;
 	// [target performSelectorOnMainThread:selector withObject:result waitUntilDone:YES];
 }

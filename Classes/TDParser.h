@@ -20,7 +20,7 @@
 }
 
 - (id)initWithTarget:(id)theTarget andSelector:(SEL)theSelector;
-- (id)initWithData:(NSData *)aData;
+- (id)JSONObjectWithData:(NSData *)aData;
 - (NSMutableArray *)parseResults:(NSError **)parseError;
 
 
