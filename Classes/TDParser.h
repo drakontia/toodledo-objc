@@ -20,8 +20,8 @@
 }
 
 - (id)initWithTarget:(id)theTarget andSelector:(SEL)theSelector;
-- (id)initWithData:(NSData *)aData;
-- (NSDictionary *)parseResults:(NSError **)parseError;
+- (id)JSONObjectWithData:(NSData *)aData;
+- (NSMutableArray *)parseResults:(NSError **)parseError;
 
 
 @property (nonatomic, retain) NSData *data;

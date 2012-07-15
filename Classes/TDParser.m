@@ -20,7 +20,7 @@
 	return self;
 }
 
-- (id)initWithData:(NSData *)aData {
+- (id)JSONObjectWithData:(NSData *)aData {
 	if (self = [super init]) {
 		self.data = aData;
 	}
@@ -39,7 +39,7 @@
 	NSDictionary *parser = [[[NSJSONSerialization alloc] init] JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
 	NSLog(@"jsonObject = %@", [parser description]);
 	[parser release];
-	
+
 	if (error) {
 		*parseError = error;
 		return nil;
@@ -60,7 +60,7 @@
 	results = [[NSDictionary alloc] init];
 }
 
-- (void)parser:(NSJSONSerialization *)parser foundCharacters:(NSString *)string {	
+- (void)parser:(NSJSONSerialization *)parser foundCharacters:(NSString *)string {
 	string = [string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 	if (!currentString) {
 		currentString = [[NSMutableString alloc] initWithString:string];

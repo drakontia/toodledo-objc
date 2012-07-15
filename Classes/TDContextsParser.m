@@ -24,7 +24,7 @@
 		[currentContext release];
 		currentContext = nil;
 	}
-	
+
 	[currentString release];
 	currentString = nil;
 }
