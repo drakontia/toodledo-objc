@@ -652,7 +652,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				PRODUCT_NAME = libToodledoAPIiPhone;
-				SDKROOT = iphonesimulator3.0;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -664,7 +664,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				PRODUCT_NAME = libToodledoAPIiPhone;
-				SDKROOT = iphonesimulator3.0;
+				SDKROOT = iphoneos;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -681,6 +681,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_GC = supported;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				New_Setting = "";
 				PRODUCT_NAME = ToodledoAPIMac;
 			};
 			name = Debug;
@@ -696,6 +697,7 @@
 					"\\\"$(DEVELOPER_FRAMEWORKS_DIR)\\\"",
 				);
 				GCC_ENABLE_OBJC_GC = supported;
+				New_Setting = "";
 				PRODUCT_NAME = ToodledoAPIMac;
 				ZERO_LINK = NO;
 			};

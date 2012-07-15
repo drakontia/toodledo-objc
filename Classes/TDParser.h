@@ -10,7 +10,7 @@
 
 
 @interface TDParser : NSObject {
-	NSMutableArray *results;
+	NSDictionary *results;
 	NSMutableString *currentString;
 @private
 	id target;
@@ -21,7 +21,7 @@
 
 - (id)initWithTarget:(id)theTarget andSelector:(SEL)theSelector;
 - (id)initWithData:(NSData *)aData;
-- (NSMutableArray *)parseResults:(NSError **)parseError;
+- (NSDictionary *)parseResults:(NSError **)parseError;
 
 
 @property (nonatomic, retain) NSData *data;

@@ -24,7 +24,7 @@
 
 @synthesize startTime, startDate, dueDate, dueTime;
 
-- (void)parserDidStartDocument:(NSXMLParser *)parser {
+- (void)parserDidStartDocument:(NSJSONSerialization *)parser {
 	[super parserDidStartDocument:parser];
 	dateTime24Formatter = [[NSDateFormatter alloc] init];
 	[dateTime24Formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];

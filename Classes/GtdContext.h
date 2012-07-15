@@ -13,10 +13,10 @@
 	
 @private
 	NSInteger uid;
-	NSString *title;
+	NSString *name;
 }
 
 @property (nonatomic) NSInteger uid;
-@property (nonatomic, copy) NSString *title;
+@property (nonatomic, copy) NSString *name;
 
 @end
