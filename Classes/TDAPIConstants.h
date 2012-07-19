@@ -113,7 +113,7 @@
 // parsing constants
 
 //tagSeperator
-#define kTagSeparator @","
+#define kTagSeparator @";"
 
 
 
