@@ -11,14 +11,14 @@
 
 @interface GtdFolder : NSObject {
 @private
-	NSInteger id;
+	NSInteger uid;
 	NSString *name;
 	BOOL private;
 	BOOL archived;
 	NSInteger ord;
 }
 
-@property NSInteger id;
+@property NSInteger uid;
 @property (nonatomic, copy) NSString *name;
 @property (getter=isPrivate) BOOL private;
 @property (getter=isArchived) BOOL archived;

@@ -39,7 +39,7 @@
 	NSDate *added;
 	NSString *timer;
 	NSDate *timeron;
-	NSText *note;
+	NSString *note;
 	NSString *meta;
 }
 
@@ -48,21 +48,29 @@
 @property (nonatomic, copy) NSArray *tag;
 @property (nonatomic) NSInteger folder;
 @property (nonatomic) NSInteger context;
-@property (nonatomic, retain) NSDate *date_created;
-@property (nonatomic, retain) NSDate *date_modified;
-@property (nonatomic, retain) NSDate *date_start;
-@property (nonatomic, retain) NSDate *date_due;
-@property (nonatomic, retain) NSDate *date_deleted;
-@property BOOL hasDueDate;
-@property BOOL hasDueTime;
-@property (nonatomic) NSInteger priority;
-@property (nonatomic, retain) NSDate *completed;
+@property (nonatomic) NSInteger goal;
+@property (nonatomic) NSInteger location;
+@property (nonatomic) NSInteger parent;
+@property (nonatomic) NSInteger children;
+@property (nonatomic) NSInteger order;
+@property (nonatomic, retain) NSDate *duedate;
+@property (nonatomic, retain) NSDate *duedatemod;
+@property (nonatomic, retain) NSDate *startdate;
+@property (nonatomic, retain) NSDate *duetime;
+@property (nonatomic, retain) NSDate *starttime;
+@property (nonatomic) NSInteger remind;
+@property (nonatomic, retain) NSString *repeat;
+@property BOOL repeatfrom;
+@property (nonatomic) NSInteger status;
 @property (nonatomic) NSInteger length;
-@property (nonatomic, copy) NSString *note;
+@property (nonatomic) NSInteger priority;
 @property BOOL star;
-@property NSInteger repeat;
-@property NSInteger status;
-@property NSInteger reminder;
-@property NSInteger parentId;
+@property (nonatomic, retain) NSDate *modified;
+@property (nonatomic, retain) NSDate *completed;
+@property (nonatomic, retain) NSDate *added;
+@property (nonatomic, copy) NSString *timer;
+@property (nonatomic, retain) NSData *timeron;
+@property (nonatomic, copy) NSString *note;
+@property (nonatomic, retain) NSString *meta;
 
 @end

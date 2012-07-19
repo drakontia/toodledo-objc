@@ -13,53 +13,50 @@
 
 @synthesize uid;
 @synthesize title;
-@synthesize date_created;
-@synthesize date_modified;
-@synthesize date_start;
-@synthesize date_due;
-@synthesize date_deleted;
-@synthesize hasDueDate;
-@synthesize hasDueTime;
-@synthesize tags;
+@synthesize tag;
 @synthesize folder;
 @synthesize context;
-@synthesize priority;
-@synthesize completed;
-@synthesize length;
-@synthesize note;
-@synthesize star;
+@synthesize goal;
+@synthesize location;
+@synthesize parent;
+@synthesize children;
+@synthesize order;
+@synthesize duedate;
+@synthesize duedatemod;
+@synthesize startdate;
+@synthesize duetime;
+@synthesize starttime;
+@synthesize remind;
 @synthesize repeat;
+@synthesize repeatfrom;
 @synthesize status;
-@synthesize reminder;
-@synthesize parentId;
+@synthesize length;
+@synthesize priority;
+@synthesize star;
+@synthesize modified;
+@synthesize completed;
+@synthesize added;
+@synthesize timer;
+@synthesize timeron;
+@synthesize note;
+@synthesize meta;
 
 - (id)init {
 	if (self = [super init]) {
 		title = nil;
-		tags = nil;
+		tag = nil;
 		uid = -1;
-		parentId = -1;
-		hasDueDate = NO;
-		hasDueTime = NO;
+		parent = 0;
+		children = 0;
+		duedatemod = 0;
+		remind = 0;
+		star = 0;
 	}
 	return self;
 }
 
-- (void) dealloc {
-	[title release];
-	[date_created release];
-	[date_due release];
-	[date_start release];
-	[date_modified release];
-	[date_deleted release];
-	[tags release];
-	[completed release];
-	[note release];
-	[super dealloc];
-}
-
 - (NSString *)description {
-	return [NSString stringWithFormat:@"<GtdTask uid='%i' title='%@' modified='%@' date_due='%@' date_start='%@'>", uid, title, date_modified, date_due, date_start];
+	return [NSString stringWithFormat:@"<GtdTask id='%i' title='%@' duedate='%@' folder='%@' context='%@'>", uid, title, duedate, folder, context];
 }
 
 

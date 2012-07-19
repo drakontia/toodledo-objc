@@ -12,23 +12,18 @@
 @implementation GtdContext
 
 @synthesize uid;
-@synthesize title;
+@synthesize name;
 
 - (id)init {
 	if (self = [super init]) {
-		title = nil;
+		name = nil;
 		uid = -1;
 	}
 	return self;
 }
 
-- (void) dealloc {
-	[title release];
-	[super dealloc];
-}
-
 - (NSString *)description {
-	return [NSString stringWithFormat:@"<GtdContext contextId='%i' title='%@'>", uid, title];
+	return [NSString stringWithFormat:@"<GtdContext id='%i' name='%@'>", uid, name];
 }
 
 @end

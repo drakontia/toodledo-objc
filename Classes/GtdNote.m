@@ -12,21 +12,24 @@
 @implementation GtdNote
 
 @synthesize uid;
-@synthesize date_created;
-@synthesize date_modified;
 @synthesize title;
-@synthesize text;
-@synthesize private;
 @synthesize folder;
+@synthesize modified;
+@synthesize added;
+@synthesize private;
+@synthesize text;
 
-- (void) dealloc 
-{
-	[super dealloc];
+- (id)init {
+	if (self = [super init]) {
+		title = nil;
+		uid = -1;
+	}
+	return self;
 }
 
 - (NSString *)description 
 {
-	return [NSString stringWithFormat:@"<GtdNote uid='%i' note='%@'>", uid, text];
+	return [NSString stringWithFormat:@"<GtdNote id='%i' text='%@'>", uid, text];
 }
 
 

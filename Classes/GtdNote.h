@@ -13,22 +13,22 @@
 {
 
 @private
-	NSInteger id;
+	NSInteger uid;
 	NSString *title;
 	NSInteger folder;
 	NSDate *modified;
 	NSDate *added;
 	BOOL private;
-	NSText *text;
+	NSString *text;
 	
 }
 
-@property (nonatomic) NSInteger id;
+@property (nonatomic) NSInteger uid;
 @property (nonatomic, copy) NSString *title;
 @property (nonatomic) NSInteger folder;
 @property (nonatomic, retain) NSDate *modified;
 @property (nonatomic, retain) NSDate *added;
 @property (nonatomic) BOOL private;
-@property (nonatomic, copy) NSText *text;
+@property (nonatomic, copy) NSString *text;
 
 @end

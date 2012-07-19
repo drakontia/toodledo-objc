@@ -12,29 +12,24 @@
 @implementation GtdFolder
 
 @synthesize uid;
-@synthesize title;
+@synthesize name;
 @synthesize private;
 @synthesize archived;
-@synthesize order;
+@synthesize ord;
 
 - (id)init {
 	if (self = [super init]) {
-		title = nil;
+		name = nil;
 		uid = -1;
 		private = NO;
 		archived = NO;
-		order = -1;
+		ord = -1;
 	}
 	return self;
 }
 
-- (void) dealloc {
-	[title release];
-	[super dealloc];
-}
-
 - (NSString *)description {
-	return [NSString stringWithFormat:@"<GtdFolder uid='%i' title='%@' private='%i' archived='%i' order='%i'>", uid, title, private, archived, order];
+	return [NSString stringWithFormat:@"<GtdFolder id='%i' name='%@' private='%i' archived='%i' ord='%i'>", uid, name, private, archived, ord];
 }
 
 
