@@ -1,0 +1,16 @@
+//
+//  TDAppConstants.h
+//  ToodledoAPI
+//
+//  Created by drakontia on 12/07/20.
+//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//
+
+
+////////////////////////////////////////////////////////////////////////////////
+
+// your app id
+#define kAppId @"yourAppId"
+
+// your app token
+#define kAppToken @"yourAppToken"

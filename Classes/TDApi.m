@@ -9,6 +9,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "TDApi.h"
 #import "TDApiConstants.h"
+#import "TDAppConstants.h"
 #import "TDSimpleParser.h"
 #import "TDFoldersParser.h"
 #import "TDContextsParser.h"
@@ -1042,42 +1043,70 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 }
 
 // Used for userid lookup. Warning: the pwd is sent unencrypted.
-- (NSString *)getUserIdForUsername:(NSString *)aUsername andPassword:(NSString *)aPassword {
+- (NSString *)getUserIdForEmail:(NSString *)aEmail andPassword:(NSString *)aPassword {
 
 	NSString * returnResult = nil;
-	NSError *requestError = nil, *parseError = nil;
-
-	NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:aUsername, @"email", aPassword, @"pass", nil];
-	NSURLRequest *request = [self requestForURLString:kLookupURLFormat additionalParameters:params];
-	[params release];
-	NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&requestError];
 	
-	if (requestError == nil) {
-		// all ok
-		TDSimpleParser *parser = [[TDSimpleParser alloc] initWithData:responseData];
-		parser.tagName = @"userid";
-		NSArray *result = [[[parser parseResults:&parseError] retain] autorelease];
-		
-		if (parseError != nil) {
-			// error in response xml
-			DLog(@"Error while parsing userId.");
-		}
-		else {
-			// all ok, save result
-			if ([result count] == 1) {
-				DLog(@"Got user id: %@", [result objectAtIndex:0]);
-				returnResult = [result objectAtIndex:0];
-			}
-			else {
-				DLog(@"Could not fetch user id.");
-			}
-		}
-		[parser release];
-	}
-	else {
-		// error while loading request
-		DLog(@"Error while loading request for userId.");
-	}
+	char *cStr = [[NSString stringWithFormat:@"%@%@",aEmail,kAppToken] UTF8String];
+	unsigned char result[CC_MD5_DIGEST_LENGTH];
+	CC_MD5(cStr, strlen(cStr), result);
+	NSString *sig = [NSString stringWithFormat: @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X", result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10], result[11], result[12], result[13], result[14], result[15]];
+	
+
+	NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:aEmail, @"email", 
+							aPassword, @"pass", 
+							kAppId, @"appid",
+							sig, @"sig",
+							nil];
+	NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+	[queue setName:@"com.your.toodledo.account.lookup"];
+	NSURLRequest *request = [self requestForURLString:kLookupURLFormat additionalParameters:params];
+	[NSURLConnection sendAsynchronousRequest:request queue:queue
+						completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+							if (error) {
+								DLog(@"Error while loading request for userId.");
+								return;
+							}
+							// all ok
+							// Decode the data
+							NSError *jsonError;
+							NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+							
+							// If there was an error decoding the JSON
+							if (jsonError) {
+								
+								dispatch_async(dispatch_get_main_queue(), ^(void) {
+									// error in response json
+									DLog(@"Error while parsing userId.");
+								});
+								return;
+							}
+							
+							// All looks fine, lets call the completion block with the response data
+							dispatch_async(dispatch_get_main_queue(), ^(void) {
+								completionBlock([responseDict objectForKey:@"useid", nil);
+							});
+							
+							TDSimpleParser *parser = [[TDSimpleParser alloc] initWithData:data];
+							parser.tagName = @"userid";
+							NSArray *result = [[[parser parseResults:&parseError] retain] autorelease];
+							
+							if (parseError != nil) {
+								// error in response xml
+								DLog(@"Error while parsing userId.");
+							}
+							else {
+								// all ok, save result
+								if ([result count] == 1) {
+									DLog(@"Got user id: %@", [result objectAtIndex:0]);
+									returnResult = [result objectAtIndex:0];
+								}
+								else {
+									DLog(@"Could not fetch user id.");
+								}
+							}
+						}];
+	
 	return returnResult;
 }
 
@@ -1155,9 +1184,8 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 	
 	// Create rest url
 	NSURL *url = [[NSURL alloc] initWithString:params];
-	[params release];
 	
-	NSURLRequest *request = [[[NSURLRequest alloc] initWithURL:url] autorelease];
+	NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
 	[url release];
 	
 	DLog(@"Created request with url: %@", [[request URL] absoluteString]);
@@ -1175,9 +1203,7 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 		
 	// Create rest url
 	NSURL *url = [[NSURL alloc] initWithString:params];
-	[params release];
-	NSURLRequest *request = [[[NSURLRequest alloc] initWithURL:url] autorelease];
-	[url release];
+	NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
 	
 	DLog(@"Created request with url: %@", [[request URL] absoluteString]);
 	
