@@ -1,6 +1,10 @@
-build
-*.pbxuser
-*.mode1v3
+build/
 .DS_Store
 
-*/project.xcworkspace/xcuserdata/*
+TDAppConstants.h
+
+xcuserdata/
+*.xcworkspace/
+*.mode1v3
+*.mode2v3
+*.perspectivev3
