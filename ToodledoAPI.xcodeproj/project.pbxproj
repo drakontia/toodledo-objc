@@ -118,28 +118,28 @@
 		0182DD1415B418A200751FCF /* GHUnitIOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0182DD1315B418A200751FCF /* GHUnitIOS.framework */; };
 		0182DD1615B41B5800751FCF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0182DD1515B41B5800751FCF /* UIKit.framework */; };
 		0182DD1815B41B6800751FCF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0182DD1715B41B6800751FCF /* CoreGraphics.framework */; };
-		0182DD1C15B41C4600751FCF /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD1B15B41C4600751FCF /* GHUnitIOSTestMain.m */; };
-		0182DD2715B41C4A00751FCF /* libOCMock.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0182DD2615B41C4A00751FCF /* libOCMock.a */; };
-		0182DD2A15B42AAD00751FCF /* GtdGoal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD2815B42AAD00751FCF /* GtdGoal.h */; };
-		0182DD2B15B42AAD00751FCF /* GtdGoal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD2815B42AAD00751FCF /* GtdGoal.h */; };
-		0182DD2C15B42AAD00751FCF /* GtdGoal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD2815B42AAD00751FCF /* GtdGoal.h */; };
-		0182DD2D15B42AAD00751FCF /* GtdGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD2915B42AAD00751FCF /* GtdGoal.m */; };
-		0182DD2E15B42AAD00751FCF /* GtdGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD2915B42AAD00751FCF /* GtdGoal.m */; };
-		0182DD2F15B42AAD00751FCF /* GtdGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD2915B42AAD00751FCF /* GtdGoal.m */; };
-		0182DD3015B42AAD00751FCF /* GtdGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD2915B42AAD00751FCF /* GtdGoal.m */; };
-		0182DD3115B42AAD00751FCF /* GtdGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD2915B42AAD00751FCF /* GtdGoal.m */; };
-		0182DD3415B42ACB00751FCF /* GtdLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD3215B42ACB00751FCF /* GtdLocation.h */; };
-		0182DD3515B42ACB00751FCF /* GtdLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD3215B42ACB00751FCF /* GtdLocation.h */; };
-		0182DD3615B42ACB00751FCF /* GtdLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD3215B42ACB00751FCF /* GtdLocation.h */; };
-		0182DD3715B42ACB00751FCF /* GtdLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD3315B42ACB00751FCF /* GtdLocation.m */; };
-		0182DD3815B42ACB00751FCF /* GtdLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD3315B42ACB00751FCF /* GtdLocation.m */; };
-		0182DD3915B42ACB00751FCF /* GtdLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD3315B42ACB00751FCF /* GtdLocation.m */; };
-		0182DD3A15B42ACB00751FCF /* GtdLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD3315B42ACB00751FCF /* GtdLocation.m */; };
-		0182DD3B15B42ACB00751FCF /* GtdLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD3315B42ACB00751FCF /* GtdLocation.m */; };
 		0182DD3E15B4719800751FCF /* TDApiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD3D15B4719800751FCF /* TDApiTests.m */; };
-		0182DD4115B897C900751FCF /* TDAppConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD4015B897C900751FCF /* TDAppConstants.h */; };
-		0182DD4215B897C900751FCF /* TDAppConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD4015B897C900751FCF /* TDAppConstants.h */; };
-		0182DD4315B897C900751FCF /* TDAppConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD4015B897C900751FCF /* TDAppConstants.h */; };
+		0182DD4815BB8A3C00751FCF /* GtdGoal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD4415BB8A3B00751FCF /* GtdGoal.h */; };
+		0182DD4915BB8A3C00751FCF /* GtdGoal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD4415BB8A3B00751FCF /* GtdGoal.h */; };
+		0182DD4A15BB8A3C00751FCF /* GtdGoal.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD4415BB8A3B00751FCF /* GtdGoal.h */; };
+		0182DD4B15BB8A3C00751FCF /* GtdGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD4515BB8A3B00751FCF /* GtdGoal.m */; };
+		0182DD4C15BB8A3C00751FCF /* GtdGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD4515BB8A3B00751FCF /* GtdGoal.m */; };
+		0182DD4D15BB8A3C00751FCF /* GtdGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD4515BB8A3B00751FCF /* GtdGoal.m */; };
+		0182DD4E15BB8A3C00751FCF /* GtdGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD4515BB8A3B00751FCF /* GtdGoal.m */; };
+		0182DD4F15BB8A3C00751FCF /* GtdGoal.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD4515BB8A3B00751FCF /* GtdGoal.m */; };
+		0182DD5015BB8A3C00751FCF /* GtdLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD4615BB8A3C00751FCF /* GtdLocation.h */; };
+		0182DD5115BB8A3C00751FCF /* GtdLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD4615BB8A3C00751FCF /* GtdLocation.h */; };
+		0182DD5215BB8A3C00751FCF /* GtdLocation.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD4615BB8A3C00751FCF /* GtdLocation.h */; };
+		0182DD5315BB8A3C00751FCF /* GtdLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD4715BB8A3C00751FCF /* GtdLocation.m */; };
+		0182DD5415BB8A3C00751FCF /* GtdLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD4715BB8A3C00751FCF /* GtdLocation.m */; };
+		0182DD5515BB8A3C00751FCF /* GtdLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD4715BB8A3C00751FCF /* GtdLocation.m */; };
+		0182DD5615BB8A3C00751FCF /* GtdLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD4715BB8A3C00751FCF /* GtdLocation.m */; };
+		0182DD5715BB8A3C00751FCF /* GtdLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD4715BB8A3C00751FCF /* GtdLocation.m */; };
+		0182DD5915BB8A6700751FCF /* GHUnitIOSTestMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 0182DD5815BB8A6700751FCF /* GHUnitIOSTestMain.m */; };
+		0182DD5B15BB8A8300751FCF /* TDAppConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD5A15BB8A8300751FCF /* TDAppConstants.h */; };
+		0182DD5C15BB8A8300751FCF /* TDAppConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD5A15BB8A8300751FCF /* TDAppConstants.h */; };
+		0182DD5D15BB8A8300751FCF /* TDAppConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 0182DD5A15BB8A8300751FCF /* TDAppConstants.h */; };
+		0182DD5F15BB8A9900751FCF /* UnitTests-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0182DD5E15BB8A9900751FCF /* UnitTests-Info.plist */; };
 		FAA9E6F510A88CAF001925AB /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA9E6F410A88CAF001925AB /* SenTestingKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -201,26 +201,19 @@
 		0182DD1315B418A200751FCF /* GHUnitIOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GHUnitIOS.framework; sourceTree = "<group>"; };
 		0182DD1515B41B5800751FCF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		0182DD1715B41B6800751FCF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.1.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
-		0182DD1B15B41C4600751FCF /* GHUnitIOSTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GHUnitIOSTestMain.m; path = ../GHUnitIOSTestMain.m; sourceTree = "<group>"; };
-		0182DD2015B41C4A00751FCF /* NSNotificationCenter+OCMAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNotificationCenter+OCMAdditions.h"; sourceTree = "<group>"; };
-		0182DD2115B41C4A00751FCF /* OCMArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMArg.h; sourceTree = "<group>"; };
-		0182DD2215B41C4A00751FCF /* OCMConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMConstraint.h; sourceTree = "<group>"; };
-		0182DD2315B41C4A00751FCF /* OCMock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMock.h; sourceTree = "<group>"; };
-		0182DD2415B41C4A00751FCF /* OCMockObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockObject.h; sourceTree = "<group>"; };
-		0182DD2515B41C4A00751FCF /* OCMockRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OCMockRecorder.h; sourceTree = "<group>"; };
-		0182DD2615B41C4A00751FCF /* libOCMock.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libOCMock.a; sourceTree = "<group>"; };
-		0182DD2815B42AAD00751FCF /* GtdGoal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GtdGoal.h; sourceTree = "<group>"; };
-		0182DD2915B42AAD00751FCF /* GtdGoal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GtdGoal.m; sourceTree = "<group>"; };
-		0182DD3215B42ACB00751FCF /* GtdLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GtdLocation.h; sourceTree = "<group>"; };
-		0182DD3315B42ACB00751FCF /* GtdLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GtdLocation.m; sourceTree = "<group>"; };
 		0182DD3D15B4719800751FCF /* TDApiTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TDApiTests.m; sourceTree = "<group>"; };
 		0182DD3F15B477E800751FCF /* TDApiTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDApiTests.h; sourceTree = "<group>"; };
-		0182DD4015B897C900751FCF /* TDAppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TDAppConstants.h; sourceTree = "<group>"; };
+		0182DD4415BB8A3B00751FCF /* GtdGoal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GtdGoal.h; path = Classes/GtdGoal.h; sourceTree = "<group>"; };
+		0182DD4515BB8A3B00751FCF /* GtdGoal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GtdGoal.m; path = Classes/GtdGoal.m; sourceTree = "<group>"; };
+		0182DD4615BB8A3C00751FCF /* GtdLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GtdLocation.h; path = Classes/GtdLocation.h; sourceTree = "<group>"; };
+		0182DD4715BB8A3C00751FCF /* GtdLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GtdLocation.m; path = Classes/GtdLocation.m; sourceTree = "<group>"; };
+		0182DD5815BB8A6700751FCF /* GHUnitIOSTestMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GHUnitIOSTestMain.m; sourceTree = "<group>"; };
+		0182DD5A15BB8A8300751FCF /* TDAppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TDAppConstants.h; path = Classes/TDAppConstants.h; sourceTree = "<group>"; };
+		0182DD5E15BB8A9900751FCF /* UnitTests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "UnitTests-Info.plist"; path = "Tests/UnitTests-Info.plist"; sourceTree = "<group>"; };
 		08FB779EFE84155DC02AAC07 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		CF04581710E2F5C400DED3CF /* liblibToodledoAPIiPhone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibToodledoAPIiPhone.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA649BBA10C30B250051F758 /* libToodledoAPIMac.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libToodledoAPIMac.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAA9E6ED10A88C7C001925AB /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FAA9E6EE10A88C7C001925AB /* UnitTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UnitTests-Info.plist"; sourceTree = "<group>"; };
 		FAA9E6F410A88CAF001925AB /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		FAF874B31096478600C4C137 /* libToodledoAPI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libToodledoAPI.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -234,7 +227,6 @@
 				0182DD1615B41B5800751FCF /* UIKit.framework in Frameworks */,
 				0182DD0015B4182C00751FCF /* Foundation.framework in Frameworks */,
 				0182DD1415B418A200751FCF /* GHUnitIOS.framework in Frameworks */,
-				0182DD2715B41C4A00751FCF /* libOCMock.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,7 +265,7 @@
 		0182DD0315B4182C00751FCF /* GHTests */ = {
 			isa = PBXGroup;
 			children = (
-				0182DD1B15B41C4600751FCF /* GHUnitIOSTestMain.m */,
+				0182DD5815BB8A6700751FCF /* GHUnitIOSTestMain.m */,
 				0182DD0415B4182C00751FCF /* Supporting Files */,
 				0182DD3F15B477E800751FCF /* TDApiTests.h */,
 				0182DD3D15B4719800751FCF /* TDApiTests.m */,
@@ -291,33 +283,9 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		0182DD1D15B41C4A00751FCF /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				0182DD1F15B41C4A00751FCF /* OCMock */,
-				0182DD2615B41C4A00751FCF /* libOCMock.a */,
-			);
-			path = Libraries;
-			sourceTree = "<group>";
-		};
-		0182DD1F15B41C4A00751FCF /* OCMock */ = {
-			isa = PBXGroup;
-			children = (
-				0182DD2015B41C4A00751FCF /* NSNotificationCenter+OCMAdditions.h */,
-				0182DD2115B41C4A00751FCF /* OCMArg.h */,
-				0182DD2215B41C4A00751FCF /* OCMConstraint.h */,
-				0182DD2315B41C4A00751FCF /* OCMock.h */,
-				0182DD2415B41C4A00751FCF /* OCMockObject.h */,
-				0182DD2515B41C4A00751FCF /* OCMockRecorder.h */,
-			);
-			name = OCMock;
-			path = Headers/OCMock;
-			sourceTree = "<group>";
-		};
 		08FB7794FE84155DC02AAC07 /* ToodledoAPI */ = {
 			isa = PBXGroup;
 			children = (
-				0182DD1D15B41C4A00751FCF /* Libraries */,
 				08FB7795FE84155DC02AAC07 /* Classes */,
 				FAA9E7C610A8A36E001925AB /* Test Classes */,
 				0182DD0315B4182C00751FCF /* GHTests */,
@@ -367,7 +335,7 @@
 		FAA9E7C610A8A36E001925AB /* Test Classes */ = {
 			isa = PBXGroup;
 			children = (
-				FAA9E6EE10A88C7C001925AB /* UnitTests-Info.plist */,
+				0182DD5E15BB8A9900751FCF /* UnitTests-Info.plist */,
 				01318A27158A2B9D009D3D30 /* APITests.m */,
 				01318A28158A2B9D009D3D30 /* ContestTests.m */,
 				01318A29158A2B9D009D3D30 /* ContextParserTest.m */,
@@ -410,8 +378,10 @@
 		FAF874DD10965EAE00C4C137 /* Domain Classes */ = {
 			isa = PBXGroup;
 			children = (
-				0182DD2815B42AAD00751FCF /* GtdGoal.h */,
-				0182DD2915B42AAD00751FCF /* GtdGoal.m */,
+				0182DD4415BB8A3B00751FCF /* GtdGoal.h */,
+				0182DD4515BB8A3B00751FCF /* GtdGoal.m */,
+				0182DD4615BB8A3C00751FCF /* GtdLocation.h */,
+				0182DD4715BB8A3C00751FCF /* GtdLocation.m */,
 				01318A49158A2BD2009D3D30 /* GtdContext.h */,
 				01318A4A158A2BD2009D3D30 /* GtdContext.m */,
 				01318A4B158A2BD2009D3D30 /* GtdFolder.h */,
@@ -420,8 +390,6 @@
 				01318A4E158A2BD2009D3D30 /* GtdNote.m */,
 				01318A4F158A2BD2009D3D30 /* GtdTask.h */,
 				01318A50158A2BD2009D3D30 /* GtdTask.m */,
-				0182DD3215B42ACB00751FCF /* GtdLocation.h */,
-				0182DD3315B42ACB00751FCF /* GtdLocation.m */,
 			);
 			name = "Domain Classes";
 			sourceTree = "<group>";
@@ -429,8 +397,8 @@
 		FAF874ED10965F1D00C4C137 /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				0182DD5A15BB8A8300751FCF /* TDAppConstants.h */,
 				01318AB5158A2C09009D3D30 /* TDAPIConstants.h */,
-				0182DD4015B897C900751FCF /* TDAppConstants.h */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -457,9 +425,9 @@
 				01318AA9158A2BF2009D3D30 /* TDTasksParser.h in Headers */,
 				01318AB0158A2BF2009D3D30 /* TDUserInfoParser.h in Headers */,
 				01318AB8158A2C09009D3D30 /* TDAPIConstants.h in Headers */,
-				0182DD2C15B42AAD00751FCF /* GtdGoal.h in Headers */,
-				0182DD3615B42ACB00751FCF /* GtdLocation.h in Headers */,
-				0182DD4315B897C900751FCF /* TDAppConstants.h in Headers */,
+				0182DD4A15BB8A3C00751FCF /* GtdGoal.h in Headers */,
+				0182DD5215BB8A3C00751FCF /* GtdLocation.h in Headers */,
+				0182DD5D15BB8A8300751FCF /* TDAppConstants.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,9 +450,9 @@
 				01318AA8158A2BF2009D3D30 /* TDTasksParser.h in Headers */,
 				01318AAF158A2BF2009D3D30 /* TDUserInfoParser.h in Headers */,
 				01318AB7158A2C09009D3D30 /* TDAPIConstants.h in Headers */,
-				0182DD2B15B42AAD00751FCF /* GtdGoal.h in Headers */,
-				0182DD3515B42ACB00751FCF /* GtdLocation.h in Headers */,
-				0182DD4215B897C900751FCF /* TDAppConstants.h in Headers */,
+				0182DD4915BB8A3C00751FCF /* GtdGoal.h in Headers */,
+				0182DD5115BB8A3C00751FCF /* GtdLocation.h in Headers */,
+				0182DD5C15BB8A8300751FCF /* TDAppConstants.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,9 +475,9 @@
 				01318AA7158A2BF2009D3D30 /* TDTasksParser.h in Headers */,
 				01318AAE158A2BF2009D3D30 /* TDUserInfoParser.h in Headers */,
 				01318AB6158A2C09009D3D30 /* TDAPIConstants.h in Headers */,
-				0182DD2A15B42AAD00751FCF /* GtdGoal.h in Headers */,
-				0182DD3415B42ACB00751FCF /* GtdLocation.h in Headers */,
-				0182DD4115B897C900751FCF /* TDAppConstants.h in Headers */,
+				0182DD4815BB8A3C00751FCF /* GtdGoal.h in Headers */,
+				0182DD5015BB8A3C00751FCF /* GtdLocation.h in Headers */,
+				0182DD5B15BB8A8300751FCF /* TDAppConstants.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +612,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0182DD5F15BB8A9900751FCF /* UnitTests-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -670,10 +639,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0182DD1C15B41C4600751FCF /* GHUnitIOSTestMain.m in Sources */,
-				0182DD3115B42AAD00751FCF /* GtdGoal.m in Sources */,
-				0182DD3B15B42ACB00751FCF /* GtdLocation.m in Sources */,
 				0182DD3E15B4719800751FCF /* TDApiTests.m in Sources */,
+				0182DD4F15BB8A3C00751FCF /* GtdGoal.m in Sources */,
+				0182DD5715BB8A3C00751FCF /* GtdLocation.m in Sources */,
+				0182DD5915BB8A6700751FCF /* GHUnitIOSTestMain.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -694,8 +663,8 @@
 				01318AA6158A2BF2009D3D30 /* TDSimpleParser.m in Sources */,
 				01318AAD158A2BF2009D3D30 /* TDTasksParser.m in Sources */,
 				01318AB4158A2BF2009D3D30 /* TDUserInfoParser.m in Sources */,
-				0182DD3015B42AAD00751FCF /* GtdGoal.m in Sources */,
-				0182DD3A15B42ACB00751FCF /* GtdLocation.m in Sources */,
+				0182DD4E15BB8A3C00751FCF /* GtdGoal.m in Sources */,
+				0182DD5615BB8A3C00751FCF /* GtdLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -716,8 +685,8 @@
 				01318AA4158A2BF2009D3D30 /* TDSimpleParser.m in Sources */,
 				01318AAB158A2BF2009D3D30 /* TDTasksParser.m in Sources */,
 				01318AB2158A2BF2009D3D30 /* TDUserInfoParser.m in Sources */,
-				0182DD2E15B42AAD00751FCF /* GtdGoal.m in Sources */,
-				0182DD3815B42ACB00751FCF /* GtdLocation.m in Sources */,
+				0182DD4C15BB8A3C00751FCF /* GtdGoal.m in Sources */,
+				0182DD5415BB8A3C00751FCF /* GtdLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,8 +716,8 @@
 				01318AA5158A2BF2009D3D30 /* TDSimpleParser.m in Sources */,
 				01318AAC158A2BF2009D3D30 /* TDTasksParser.m in Sources */,
 				01318AB3158A2BF2009D3D30 /* TDUserInfoParser.m in Sources */,
-				0182DD2F15B42AAD00751FCF /* GtdGoal.m in Sources */,
-				0182DD3915B42ACB00751FCF /* GtdLocation.m in Sources */,
+				0182DD4D15BB8A3C00751FCF /* GtdGoal.m in Sources */,
+				0182DD5515BB8A3C00751FCF /* GtdLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -769,8 +738,8 @@
 				01318AA3158A2BF2009D3D30 /* TDSimpleParser.m in Sources */,
 				01318AAA158A2BF2009D3D30 /* TDTasksParser.m in Sources */,
 				01318AB1158A2BF2009D3D30 /* TDUserInfoParser.m in Sources */,
-				0182DD2D15B42AAD00751FCF /* GtdGoal.m in Sources */,
-				0182DD3715B42ACB00751FCF /* GtdLocation.m in Sources */,
+				0182DD4B15BB8A3C00751FCF /* GtdGoal.m in Sources */,
+				0182DD5315BB8A3C00751FCF /* GtdLocation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
