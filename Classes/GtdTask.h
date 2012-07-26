@@ -54,7 +54,7 @@
 @property (nonatomic) NSInteger children;
 @property (nonatomic) NSInteger order;
 @property (nonatomic, retain) NSDate *duedate;
-@property (nonatomic, retain) NSDate *duedatemod;
+@property (nonatomic) NSInteger duedatemod;
 @property (nonatomic, retain) NSDate *startdate;
 @property (nonatomic, retain) NSDate *duetime;
 @property (nonatomic, retain) NSDate *starttime;

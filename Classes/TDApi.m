@@ -21,7 +21,7 @@
 @interface TDApi ()
 
 - (BOOL)loadAccountInfo;
-- (NSString *)getUserIdForUsername:(NSString *)aUsername andPassword:(NSString *)aPassword;
+- (NSString *)getUserIdForEmail:(NSString *)aEmail andPassword:(NSString *)aPassword;
 - (NSURLRequest *)requestForURLString:(NSString *)anUrlString additionalParameters:(NSDictionary *)additionalParameters;
 - (NSURLRequest *)authenticatedRequestForURLString:(NSString *)anUrlString additionalParameters:(NSDictionary *)additionalParameters;
 - (void)setPasswordHashWithPassword:(NSString *)password;
@@ -30,7 +30,7 @@
 @property (nonatomic, copy) NSString *key;
 @property (nonatomic, copy) NSString *passwordHash;
 @property (nonatomic, retain) NSDate *keyValidity;
-@property (nonatomic, retain) NSDictionary *accountInfo;
+@property (nonatomic, retain) NSMutableDictionary *accountInfo;
 
 @end
 
@@ -43,48 +43,37 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 
 @synthesize userId, key, keyValidity, passwordHash, accountInfo;
 
-- (void) dealloc {
-	[passwordHash release];
-	[keyValidity release];
-	[key release];
-	[userId release];
-	[super dealloc];
-}
-
 #pragma mark -
 #pragma mark GtdApi protocol implementation
 
-- (id)initWithUsername:(NSString *)username password:(NSString *)password error:(NSError **)error {
+- (id)initWithEmail:(NSString *)email password:(NSString *)password error:(NSError **)error {
 	*error = nil;
 	if (self = [super init]) {
 		
 		// Check if username and password is set
-		if (username == nil || password == nil || [username length] == 0 || [password length] == 0) {
+		if (email == nil || password == nil || [email length] == 0 || [password length] == 0) {
 			// error: empty arguments
 			*error = [NSError errorWithDomain:GtdApiErrorDomain code:GtdApiMissingCredentialsError userInfo:nil];
 			[self release];
 			return nil;
 		}
 		else {
-			self.userId = [self getUserIdForUsername:username andPassword:password];
+			self.userId = [self getUserIdForEmail:email andPassword:password];
 			
 			//Check userId
 			if (self.userId == nil) {
 				// UserId unknown error (connection ? )
 				*error = [NSError errorWithDomain:GtdApiErrorDomain code:GtdApiDataError userInfo:nil];
-				[self release];
 				return nil;
 			}
 			else if ([userId isEqualToString:@"0"]) {
 				// error: empty arguments, redundant
 				*error = [NSError errorWithDomain:GtdApiErrorDomain code:GtdApiMissingCredentialsError userInfo:nil];
-				[self release];
 				return nil;
 			}
 			else if ([userId isEqualToString:@"1"]) {
 				// error: wrong credentials
 				*error = [NSError errorWithDomain:GtdApiErrorDomain code:GtdApiWrongCredentialsError userInfo:nil];
-				[self release];
 				return nil;
 			}
 			else {
@@ -98,7 +87,7 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 }
 
 - (BOOL)isAuthenticated {
-	if (key == nil || keyValidity == nil | [keyValidity compare:[NSDate date]] == NSOrderedDescending)
+	if (key == nil || keyValidity == nil | [keyValidity compare:[NSDate dateWithTimeIntervalSinceNow:-4*60*60] ] == NSOrderedAscending)
 		return NO;
 	else
 		return YES;
@@ -183,13 +172,13 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 	NSInteger returnResult = -1;
 
 	// Check parameters
-	if (aFolder == nil || aFolder.title == nil) {
+	if (aFolder == nil || aFolder.name == nil) {
 		*error = [NSError errorWithDomain:GtdApiErrorDomain code:GtdApiMissingParameters userInfo:nil];
 	}
 	// Check if valid key
 	else if (self.key != nil) {
 		NSError *requestError = nil, *parseError = nil;
-		NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:aFolder.title, @"title", (aFolder.private == NO ? @"0" : @"1"), @"private", nil];
+		NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:aFolder.name, @"name", (aFolder.private == NO ? @"0" : @"1"), @"private", nil];
 		NSURLRequest *request = [self authenticatedRequestForURLString:kAddFolderURLFormat additionalParameters:params];
 		NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&requestError];
 		[params release];
@@ -272,14 +261,14 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 	BOOL returnResult = NO;
 	
 	// Check parameters
-	if (aFolder == nil || aFolder.uid == -1 || aFolder.title == nil) {
+	if (aFolder == nil || aFolder.uid == -1 || aFolder.name == nil) {
 		*error = [NSError errorWithDomain:GtdApiErrorDomain code:GtdApiMissingParameters userInfo:nil];
 	}
 	// Check if valid key
 	else if (self.key != nil) {
 		NSError *requestError = nil, *parseError = nil;
 		NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", aFolder.uid], @"id",
-																			aFolder.title, @"title",
+																			aFolder.name, @"name",
 																			(aFolder.private == NO ? @"0" : @"1"), @"private",
 																			(aFolder.private == NO ? @"0" : @"1"), @"archived",
 																			nil];
@@ -325,15 +314,43 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 	
 	id returnResult = nil;
 	
-	if (self.key != nil) {
-		NSError *requestError = nil, *parseError = nil;
+	if (self.key) {
 		NSURLRequest *request = [self authenticatedRequestForURLString:kGetTasksURLFormat additionalParameters:nil];
-		NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&requestError];
+		NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+		[queue setName:@"com.your.toodledo.task.get"];
+		[NSURLConnection sendAsynchronousRequest:request queue:queue
+							   completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+								   if (error) {
+									   DLog(@"Error while loading request for tasks.");
+									   return;
+								   }
+								   // all ok
+								   // Decode the data
+								   NSError *jsonError;
+								   NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+								   
+								   // If there was an error decoding the JSON
+								   if (jsonError) {
+									   
+									   dispatch_async(dispatch_get_main_queue(), ^(void) {
+										   // error in response json
+										   DLog(@"Error while parsing userId.");
+									   });
+									   return;
+								   }
+								   
+								   // All looks fine, lets call the completion block with the response data
+								   dispatch_async(dispatch_get_main_queue(), ^(void){
+									   DLog(@"Got user id: %@", [responseDict valueForKey:@"userid"]);
+									   return [responseDict valueForKey:@"useid"];
+								   });
+								   
+							   }];
 		
 		if (requestError == nil) {
 			// all ok
 			TDTasksParser *parser = [[TDTasksParser alloc] initWithData:responseData];
-			NSArray *result = [[[parser parseResults:&parseError] retain] autorelease];
+			NSArray *result = [[[parser parseResults:&p arseError] retain] autorelease];
 			
 			if(parseError != nil)
 				*error = [NSError errorWithDomain:GtdApiErrorDomain code:GtdApiDataError userInfo:nil];
@@ -357,7 +374,6 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 				}
 				returnResult = result;
 			}
-			[parser release];
 		}
 		else
 			*error = [NSError errorWithDomain:GtdApiErrorDomain code:GtdApiNotReachableError userInfo:nil];
@@ -423,10 +439,10 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 		
 		//pro account check
 		if([[accountInfo objectForKey:@"pro"] intValue] != 1)
-			aTask.parentId = 0;
+			aTask.parent = 0;
 		
 		//whitespace von tags trimmen
-		for (NSString *tag in aTask.tags)
+		for (NSString *tag in aTask.tag)
 			tag = [tag stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 		
 		NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
@@ -546,7 +562,7 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 		else {
 			[params setObject:[NSString stringWithFormat:@"%d", (NSInteger)0] forKey:@"completed"];
 		}
-		[params setObject:[NSString stringWithFormat:@"%d", aTask.reminder] forKey:@"reminder"];
+		[params setObject:[NSString stringWithFormat:@"%d", aTask.remind] forKey:@"remind"];
 		[params setObject:[NSString stringWithFormat:@"%d", aTask.repeat] forKey:@"repeat"];
 		[params setObject:[NSString stringWithFormat:@"%d", aTask.status] forKey:@"status"];
 		[params setObject:[NSString stringWithFormat:@"%d", aTask.length] forKey:@"length"];
@@ -756,16 +772,15 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 	BOOL returnResult = NO;
 	
 	// check parameters
-	if (aContext == nil || aContext.uid == -1 || aContext.title == nil) {
+	if (aContext == nil || aContext.uid == -1 || aContext.name == nil) {
 		*error = [NSError errorWithDomain:GtdApiErrorDomain code:GtdApiMissingParameters userInfo:nil];
 	}
 	// check if valid key
 	else if(self.key != nil) {
 		NSError *requestError = nil, *parseError = nil;
-		NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", aContext.uid], @"id",aContext.title, @"title", nil];
+		NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:[NSString stringWithFormat:@"%d", aContext.uid], @"id",aContext.name, @"name", nil];
 		
 		NSURLRequest *request = [self authenticatedRequestForURLString:kEditContextURLFormat additionalParameters:params];
-		[params release];
 		NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&requestError];
 		
 		if(requestError == nil) {
@@ -781,7 +796,6 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 			else // error in response xml
 				*error = [NSError errorWithDomain:GtdApiErrorDomain code:GtdApiContextNotEditedError userInfo:nil];
 			
-			[parser autorelease];
 		}
 		else // error while loading request
 			*error = [NSError errorWithDomain:GtdApiErrorDomain code:GtdApiDataError userInfo:nil];
@@ -1023,29 +1037,45 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 	BOOL returnResult = NO;
 	
 	if (self.key != nil) {
-		NSError *requestError = nil, *parseError = nil;
 		NSURLRequest *request = [self authenticatedRequestForURLString:kAccountInfoURLFormat additionalParameters:nil];
-		NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&requestError];
-		
-		if (requestError == nil) {
-			// all ok
-			TDUserInfoParser *parser = [[TDUserInfoParser alloc] initWithData:responseData];
-			NSArray *result = [[[parser parseResults:&parseError] retain] autorelease];
-			
-			if (parseError == nil) {
-				self.accountInfo = [result objectAtIndex:0];
-				returnResult = YES;
-			}
-			[parser release];
-		}
+		NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+		[queue setName:@"com.your.toodledo.account.load"];
+		[NSURLConnection sendAsynchronousRequest:request queue:queue
+							   completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+								   if (error) {
+									   DLog(@"Error while loading request for Account Info.");
+									   return;
+								   }
+								   // all ok
+								   // Decode the data
+								   NSError *jsonError;
+								   NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+								   
+								   // If there was an error decoding the JSON
+								   if (jsonError) {
+									   
+									   dispatch_async(dispatch_get_main_queue(), ^(void) {
+										   // error in response json
+										   DLog(@"Error while parsing Account Info.");
+									   });
+									   return;
+								   }
+								   
+								   // All looks fine, lets call the completion block with the response data
+								   dispatch_async(dispatch_get_main_queue(), ^(void) {
+									   DLog(@"Got user id: %@", [responseDict valueForKey:@"userid"]);
+									   self.accountInfo = *responseDict;
+									   returnResult = YES;
+								   });
+								   
+							   }];
+
 	}
 	return returnResult;
 }
 
 // Used for userid lookup. Warning: the pwd is sent unencrypted.
 - (NSString *)getUserIdForEmail:(NSString *)aEmail andPassword:(NSString *)aPassword {
-
-	NSString * returnResult = nil;
 	
 	char *cStr = [[NSString stringWithFormat:@"%@%@",aEmail,kAppToken] UTF8String];
 	unsigned char result[CC_MD5_DIGEST_LENGTH];
@@ -1083,76 +1113,70 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 							}
 							
 							// All looks fine, lets call the completion block with the response data
-							dispatch_async(dispatch_get_main_queue(), ^(void) {
-								completionBlock([responseDict objectForKey:@"useid", nil);
+							dispatch_async(dispatch_get_main_queue(), ^(NSString) {
+								DLog(@"Got user id: %@", [responseDict valueForKey:@"userid"]);
+								return [responseDict valueForKey:@"useid"];
 							});
-							
-							TDSimpleParser *parser = [[TDSimpleParser alloc] initWithData:data];
-							parser.tagName = @"userid";
-							NSArray *result = [[[parser parseResults:&parseError] retain] autorelease];
-							
-							if (parseError != nil) {
-								// error in response xml
-								DLog(@"Error while parsing userId.");
-							}
-							else {
-								// all ok, save result
-								if ([result count] == 1) {
-									DLog(@"Got user id: %@", [result objectAtIndex:0]);
-									returnResult = [result objectAtIndex:0];
-								}
-								else {
-									DLog(@"Could not fetch user id.");
-								}
-							}
+
 						}];
-	
-	return returnResult;
+
 }
 
 // Custom getter for key; if key is not set or invalid, the getter loads a new one.
 - (NSString *)key {
 	if (key == nil || keyValidity == nil | [keyValidity compare:[NSDate date]] == NSOrderedDescending) {
 		
-		NSError *requestError = nil, *parseError = nil;
-		
 		// If no key exists or key is invalid
-		NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:userId, @"userid", @"welldone", @"appid", nil];
+		char *cStr = [[NSString stringWithFormat:@"%@%@",userId,kAppToken] UTF8String];
+		unsigned char result[CC_MD5_DIGEST_LENGTH];
+		CC_MD5(cStr, strlen(cStr), result);
+		NSString *sig = [NSString stringWithFormat: @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X", result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10], result[11], result[12], result[13], result[14], result[15]];
+		
+		NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:
+								userId, @"userid", kAppId, @"appid", sig, @"sig", nil];
 		NSURLRequest *request = [self requestForURLString:kAuthenticationURLFormat additionalParameters:params];
-		[params release];
-		
-		NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&requestError];
-		
-		if (requestError == nil) {
-			// all ok
-			TDSimpleParser *parser = [[TDSimpleParser alloc] initWithData:responseData];
-			parser.tagName = @"token";
-			NSArray *result = [[[parser parseResults:&parseError] retain] autorelease];
-			[parser release];
-			
-			if ([result count] == 1) {
-				NSString *token = [result objectAtIndex:0];
-				DLog(@"New token: %@", token);
-				
-				const char *cStr = [[NSString stringWithFormat:@"%@%@%@", passwordHash, token, userId] UTF8String];
-				unsigned char result[CC_MD5_DIGEST_LENGTH];
-				
-				CC_MD5(cStr, strlen(cStr), result);
-				
-				self.key = [[NSString stringWithFormat: @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
-							 result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10], result[11], result[12], result[13], result[14], result[15]] lowercaseString];
-				self.keyValidity = [NSDate date];
-				DLog(@"Loaded new key: %@", key);
-			}
-			else {
-				self.key = nil;
-			}
-		}
-		else {
-			// error while loading request
-			self.key = nil;
-		}
-	}
+		NSOperationQueue *queue = [[NSOperationQueue alloc] init];
+		[queue setName:@"com.your.toodledo.get.sessionToken"];
+		[NSURLConnection sendAsynchronousRequest:request queue:queue
+							   completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+								   if (error) {
+									   DLog(@"Error while loading request for sessionToken.");
+									   self.key = nil;
+									   return;
+								   }
+								   // all ok
+								   // Decode the data
+								   NSError *jsonError;
+								   NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+								   
+								   // If there was an error decoding the JSON
+								   if (jsonError) {
+									   
+									   dispatch_async(dispatch_get_main_queue(), ^(void) {
+										   // error in response json
+										   DLog(@"Error while parsing sessionToken.");
+									   });
+									   return;
+								   }
+								   
+								   // All looks fine, lets call the completion block with the response data
+								   dispatch_async(dispatch_get_main_queue(), ^(void) {
+									   NSString *token = [responseDict valueForKey:@"token"];
+									   DLog(@"New token: %@", token);
+									   
+									   const char *cStr = [[NSString stringWithFormat:@"%@%@%@", passwordHash, kAppToken, token] UTF8String];
+									   unsigned char result[CC_MD5_DIGEST_LENGTH];
+									   
+									   CC_MD5(cStr, strlen(cStr), result);
+									   
+									   self.key = [NSString stringWithFormat: @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
+												   result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10], result[11], result[12], result[13], result[14], result[15]];
+									   self.keyValidity = [NSDate date];
+									   DLog(@"Loaded new key: %@", key);
+								   });
+								}];
+	};
+
 	return key;
 }
 
@@ -1163,8 +1187,7 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 	
 	CC_MD5(cStr, strlen(cStr), result);
 	
-	self.passwordHash = [[NSString stringWithFormat: @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
-			result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10], result[11], result[12], result[13], result[14], result[15]] lowercaseString];
+	self.passwordHash = [NSString stringWithFormat: @"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",result[0], result[1], result[2], result[3], result[4], result[5], result[6], result[7], result[8], result[9], result[10], result[11], result[12], result[13], result[14], result[15]];
 }
 
 // Creates a request and append the api key
@@ -1186,7 +1209,6 @@ NSString *const GtdApiErrorDomain = @"GtdApiErrorDomain";
 	NSURL *url = [[NSURL alloc] initWithString:params];
 	
 	NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-	[url release];
 	
 	DLog(@"Created request with url: %@", [[request URL] absoluteString]);
 	
